@@ -1,0 +1,21 @@
+zerops:
+  - setup: nodejs
+    build:
+      base: nodejs@20
+      buildCommands:
+        - npm ci
+        - npm run build
+      deployFiles:
+        - dist/
+        - node_modules/
+        - package.json
+        - server.js
+      cache:
+        - node_modules
+    run:
+      start: node server.js
+      ports:
+        - port: 3000
+          http:
+            routes:
+              - port: 3000
