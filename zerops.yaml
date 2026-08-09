@@ -6,8 +6,6 @@ zerops:
         - npm i
       deployFiles:
         - ./
-      cache:
-        - node_modules
     run:
       start: node index.js
       ports:
@@ -15,3 +13,16 @@ zerops:
           http:
             routes:
               - port: 3000
+
+  - setup: aiservice
+    build:
+      base: python@3.12
+      buildCommands:
+        - python -m venv venv
+        - ./venv/bin/pip install -r requirements.txt
+      deployFiles:
+        - ./
+    run:
+      start: ./venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+      ports:
+        - port: 8000
