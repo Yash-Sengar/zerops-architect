@@ -4,16 +4,12 @@ zerops:
       base: nodejs@20
       buildCommands:
         - npm i
-        - npm run build
       deployFiles:
-        - dist/
-        - node_modules/
-        - package.json
-        - server.js
+        - ./
       cache:
         - node_modules
     run:
-      start: node server.js
+      start: node index.js
       ports:
         - port: 3000
           http:
