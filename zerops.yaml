@@ -26,3 +26,11 @@ zerops:
           http:
             routes:
               - port: 8000
+              zerops:
+  - setup: web
+    build:
+      base: static
+      deployFiles:
+        - ./
+    run:
+      base: static
