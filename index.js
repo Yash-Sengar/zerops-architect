@@ -1,11 +1,14 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
+// Accessing Zerops internal services
+const dbUrl = process.env.DATABASE_URL;
+const redisUrl = process.env.REDIS_URL;
+const aiServiceUrl = process.env.AI_SERVICE_URL;
 
-app.get('/', (req, res) => {
-  res.send('Zerops Architect API Running!');
-});
-
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+// Example call to your Python AI Engine
+async function callAiService(prompt) {
+  const response = await fetch(`${aiServiceUrl}/predict`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+  });
+  return await response.json();
+}
