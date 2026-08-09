@@ -17,12 +17,12 @@ zerops:
   - setup: aiservice
     build:
       base: python@3.12
-      buildCommands:
-        - python -m venv venv
-        - ./venv/bin/pip install -r requirements.txt
       deployFiles:
-        - ./
+        - main.py
     run:
-      start: ./venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+      start: python3 main.py
       ports:
         - port: 8000
+          http:
+            routes:
+              - port: 8000
