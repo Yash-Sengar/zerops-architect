@@ -23,10 +23,7 @@ zerops:
       start: python3 main.py
       ports:
         - port: 8000
-          http:
-            routes:
-              - port: 8000
-              zerops:
+
   - setup: web
     build:
       base: static
