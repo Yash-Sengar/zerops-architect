@@ -1,15 +1,9 @@
-import http.server
-import socketserver
+from fastapi import FastAPI
 
-PORT = 8000
+app = FastAPI()
 
-class Handler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
-        self.wfile.write(b"AI Service is running on Zerops!")
-
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Serving at port {PORT}")
-    httpd.serve_forever()
+@app.post("/predict")
+def predict(data: dict):
+    prompt = data.get("prompt", "")
+    # Add AI processing / LLM call here
+    return {"status": "success", "response": f"AI processed: {prompt}"}
